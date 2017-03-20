@@ -1,17 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchUsers } from './userReducer';
+import { fetchUsers, showNextUser } from './userReducer';
+import '../styles/App.css';
 
 class UserPage extends Component {
+  constructor(p){
+    super(p);
+    this.handleClick = this.handleClick.bind(this);
+  }
   componentDidMount(){
     const { dispatch } = this.props;
     dispatch(fetchUsers())
   }
+  handleClick(e){
+    const { dispatch, currentUser } = this.props;
+    dispatch(showNextUser(currentUser.id))
+  }
   render() {
+    const { currentUser } = this.props;
+    if (!currentUser){
+      return <pre>Loading...</pre>
+    }
     return (
-        <div className="App">
+        <div className="user-page">
           <p>Here will be header with logo</p>
-          Here we will have some info about user
+          <img src={currentUser.thumbnail} alt=""/>
+          <div>
+            <button onClick={this.handleClick} value='dislike'>Dislike</button>
+            <button onClick={this.handleClick} value='like'>Like</button>
+          </div>
         </div>
     );
   }
@@ -20,7 +37,7 @@ class UserPage extends Component {
 
 function mapStateToProps (state) {
   return {
-    userState: state
+    currentUser: state.currentUser
   }
 }
 
