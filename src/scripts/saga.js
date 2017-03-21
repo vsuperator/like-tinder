@@ -8,7 +8,7 @@ function* fetchUsers() {
     const data = yield Api.fetchUsers();
     const users = data.data.children.map(user => user.data);
     const currentUser = users[0];
-    yield put(fetchUsersSucceeded({ users,currentUser }))
+    yield put(fetchUsersSucceeded({ users, currentUser}))
   } catch (error) {
     yield put(fetchUsersFailed(error))
   }
