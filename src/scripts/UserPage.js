@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
+import Favorite from 'material-ui/svg-icons/action/favorite';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
 
 export default function UserPage({ user, onClick }) {
   if (!user){
@@ -13,6 +15,7 @@ export default function UserPage({ user, onClick }) {
         </Link>
 
         <div>
+          <Favorite />
           <button onClick={onClick} value='dislike'>Dislike</button>
           <button onClick={onClick} value='like'>Like</button>
         </div>
