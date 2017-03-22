@@ -10,11 +10,10 @@ import './styles/index.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-const muiThemebtn = getMuiTheme();
 const store = configureStore();
 
 ReactDOM.render(
-    <MuiThemeProvider muiTheme={muiThemebtn}>
+    <MuiThemeProvider>
       <Provider store={store}>
         <Router history={browserHistory}>
           <Route path='/' component={App}>

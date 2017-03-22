@@ -2,6 +2,7 @@ import React from 'react';
 import '../styles/App.css';
 import { fetchUsers, showNextUser, likeUser, dislikeUser } from './userReducer';
 import { connect } from 'react-redux';
+import CircularProgress from 'material-ui/CircularProgress';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,9 +14,8 @@ class App extends React.Component {
     const { dispatch } = this.props;
     dispatch(fetchUsers());
   }
-  handleClick(e){
+  handleClick(value){
     const { dispatch, currentUser } = this.props;
-    const { value } = e.target;
     if (value === 'like'){
       dispatch(likeUser(currentUser.id));
     } else {
@@ -23,14 +23,26 @@ class App extends React.Component {
     }
     dispatch(showNextUser(currentUser.id));
   }
-  render(){
+  renderLoader(){
+    return <CircularProgress size={60} thickness={7} />
+  }
+  renderChildren(){
     const { children, currentUser } = this.props;
+    return React.cloneElement(children, {
+      onClick: this.handleClick,
+      user: currentUser
+    })
+  }
+  render(){
+    const { currentUser } = this.props;
     return (
         <div className='container'>
-          {React.cloneElement(children, {
-            onClick: this.handleClick,
-            user: currentUser
-          })}
+          {
+            currentUser ?
+                this.renderChildren() :
+                this.renderLoader()
+
+          }
         </div>
     );
   }

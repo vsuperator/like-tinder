@@ -1,4 +1,29 @@
 .container {
-  width: 320px;
+  width: 240px;
   margin: 0 auto;
+  text-align: center;
+}
+
+.user-page-header {
+  margin: 10px 0;
+}
+
+.user-page-dislike-btn {
+  margin-right: 5px;
+}
+
+.user-page-photo img,
+.user-page-photo a {
+  width: 100%;
+}
+.user-page-photo {
+  display: flex;
+  height: 240px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.user-detail-page-header {
+  text-align: left;
 }

@@ -7,7 +7,8 @@ function* fetchUsers() {
   try {
     const data = yield Api.fetchUsers();
     const users = data.data.children.map(user => user.data);
-    const currentUser = users[0];
+    const sorted = users.sort((a,b) => (new Date(b.created) - new Date(a.created)));
+    const currentUser = sorted[0];
     yield put(fetchUsersSucceeded({ users, currentUser}))
   } catch (error) {
     yield put(fetchUsersFailed(error))
